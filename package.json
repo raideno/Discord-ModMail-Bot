@@ -1,0 +1,14 @@
+{
+  "name": "support-bot",
+  "version": "1.0.0",
+  "description": "Support is a Dm Tickets Bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raiden-56",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
