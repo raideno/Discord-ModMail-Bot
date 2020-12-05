@@ -2,6 +2,23 @@ const { DATA } = require('../config')
 
 module.exports = client => {
 
+  client.FTOAfterRestart = async () => {
+    const Tickets = client.Tickets.get('Tickets');
+    const stuff = await client.checkStuff(DATA.GUILDID, DATA.TICKETCATEGORY, DATA.STAFFROLEID, DATA.LOGCHANNELID);
+    if(stuff.category.children.size <= 0) return;
+    const channels = stuff.guild.channels.cache;
+    let num = 0;
+    await channels.forEach(c => {
+      if(c.parentID !== stuff.category.id || Array.from(Tickets.values()).includes(c.id) || Tickets.has(c.name)) return;
+      const user = stuff.guild.members.cache.get(c.name);
+      if(user) {
+        Tickets.set(c.name, c.id)
+        num = num+1
+      }
+    })
+    console.log('[✅] I Synchronized', num, 'Ticket(s)')
+  }
+
   client.checkStuff = (guildID, categoryID, roleID, logChannelID) => {
     const guild = client.guilds.cache.get(guildID);
     if(!guild) {

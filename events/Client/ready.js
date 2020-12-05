@@ -10,6 +10,7 @@ module.exports = async client => {
   console.log(`[✅] Loged In As ${client.user.tag}`);
   
   await client.checkStuff(DATA.GUILDID, DATA.TICKETCATEGORY, DATA.STAFFROLEID, DATA.LOGCHANNELID)
+  await client.FTOAfterRestart()
 
   if(client.guilds.cache.size > 1) {
     client.guilds.cache.forEach(g => {
@@ -20,10 +21,6 @@ module.exports = async client => {
     });
   }
 
-  let activities = ['Dm For Help !', 'https://discord.gg/vNgxY95Wet', /*'acti vity 3'*/ ], i = 0;
-
-  setInterval(()=> {
-    client.user.setPresence({ activity: { name: activities[i++ % activities.length], type: 'WATCHING'}, status: 'online' })
-  }, 6000);
+  client.user.setPresence({ activity: { name: 'Dm For Help!', type: 'WATCHING'}, status: 'online' })
 
 }
